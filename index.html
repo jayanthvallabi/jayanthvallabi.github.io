@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jayanth Vallabi — Software Engineer, AI/ML</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EEF1F6;
+    --surface:#FFFFFF;
+    --ink:#12192A;
+    --muted:#5B6B85;
+    --line:#D3DBE6;
+    --accent:#2F5FDE;
+    --accent-soft:#E7ECFB;
+    --amber:#E8963D;
+    --teal:#1F8A73;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0) 0 0/28px 28px,
+      var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 28px;}
+
+  /* nav */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(238,241,246,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 28px;max-width:1040px;margin:0 auto;
+  }
+  .nav-inner .brand{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--teal);position:relative;flex:none;}
+  .dot::after{
+    content:'';position:absolute;inset:-4px;border-radius:50%;
+    border:1px solid var(--teal);opacity:0.5;
+    animation:pulse 2.4s ease-out infinite;
+  }
+  @keyframes pulse{
+    0%{transform:scale(0.6);opacity:0.6;}
+    100%{transform:scale(1.8);opacity:0;}
+  }
+  .nav-links{display:flex;gap:24px;font-size:13px;color:var(--muted);}
+  .nav-links a{text-decoration:none;transition:color .15s;}
+  .nav-links a:hover{color:var(--ink);}
+  .nav-cta{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;
+    background:var(--ink);color:#fff;padding:8px 14px;border-radius:6px;
+    text-decoration:none;white-space:nowrap;
+  }
+
+  /* hero */
+  header.hero{padding:72px 0 48px;}
+  .status-card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:32px;position:relative;overflow:hidden;
+  }
+  .status-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,var(--accent),var(--teal));
+  }
+  .status-row{
+    display:flex;align-items:center;gap:10px;
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--teal);
+    text-transform:uppercase;letter-spacing:.08em;margin-bottom:18px;
+  }
+  .status-row .dot{background:var(--teal);}
+  h1{
+    font-family:'Space Grotesk',sans-serif;font-weight:700;
+    font-size:44px;line-height:1.08;margin:0 0 8px;letter-spacing:-.01em;
+  }
+  .role{
+    font-family:'IBM Plex Mono',monospace;color:var(--accent);font-size:15px;font-weight:500;
+    margin:0 0 20px;
+  }
+  .summary{max-width:620px;color:var(--muted);font-size:15.5px;line-height:1.65;margin:0 0 26px;}
+  .contact-row{display:flex;flex-wrap:wrap;gap:10px;}
+  .contact-row a, .contact-row span{
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;
+    border:1px solid var(--line);border-radius:6px;padding:8px 12px;
+    text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:6px;
+    background:#fff;transition:border-color .15s, transform .15s;
+  }
+  .contact-row a:hover{border-color:var(--accent);transform:translateY(-1px);}
+  .contact-row a.primary{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .contact-row a.primary:hover{background:var(--accent);border-color:var(--accent);}
+
+  /* metrics */
+  .metrics{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;margin-top:28px;
+  }
+  .metric{background:var(--surface);padding:20px 18px;}
+  .metric .val{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;color:var(--accent);}
+  .metric .lbl{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.05em;}
+
+  /* section shell */
+  section{padding:56px 0;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--accent);
+    text-transform:uppercase;letter-spacing:.1em;margin:0 0 8px;display:flex;align-items:center;gap:8px;
+  }
+  .eyebrow::before{content:'//';color:var(--muted);}
+  h2{font-family:'Space Grotesk',sans-serif;font-size:28px;margin:0 0 32px;letter-spacing:-.01em;}
+
+  /* pipeline */
+  .pipeline{position:relative;padding-left:32px;}
+  .pipeline::before{
+    content:'';position:absolute;left:9px;top:8px;bottom:8px;width:2px;
+    background:repeating-linear-gradient(to bottom, var(--line) 0 6px, transparent 6px 12px);
+  }
+  .node{position:relative;margin-bottom:36px;}
+  .node:last-child{margin-bottom:0;}
+  .node-marker{
+    position:absolute;left:-32px;top:4px;width:20px;height:20px;border-radius:50%;
+    background:var(--surface);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;
+  }
+  .node-marker.current{border-color:var(--teal);}
+  .node-marker .inner-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);}
+  .node-marker.current .inner-dot{background:var(--teal);}
+  .node-card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px 26px;
+  }
+  .node-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:4px;}
+  .node-role{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:18px;}
+  .node-date{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);}
+  .node-org{color:var(--accent);font-size:13.5px;font-weight:500;margin-bottom:14px;}
+  .badge-live{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;background:#E9F7F3;color:var(--teal);
+    padding:2px 8px;border-radius:20px;margin-left:8px;letter-spacing:.03em;
+  }
+  ul.bullets{margin:0;padding-left:18px;color:var(--muted);font-size:14.5px;line-height:1.7;}
+  ul.bullets li{margin-bottom:8px;}
+  ul.bullets li:last-child{margin-bottom:0;}
+  ul.bullets strong{color:var(--ink);font-weight:600;}
+
+  /* project card */
+  .project-card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:28px;
+  }
+  .project-tag{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--amber);
+    text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;
+  }
+
+  /* skills */
+  .skill-groups{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .skill-group{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 20px;
+  }
+  .skill-group h3{
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--muted);
+    text-transform:uppercase;letter-spacing:.06em;margin:0 0 12px;font-weight:500;
+  }
+  .chips{display:flex;flex-wrap:wrap;gap:7px;}
+  .chip{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;background:var(--accent-soft);
+    color:var(--accent);padding:5px 10px;border-radius:5px;
+  }
+
+  /* education */
+  .edu-card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px 26px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+  }
+  .edu-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:17px;}
+  .edu-school{color:var(--accent);font-size:13.5px;margin-top:2px;}
+  .edu-meta{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);text-align:right;}
+
+  /* footer / contact */
+  footer{
+    background:var(--ink);color:#fff;padding:64px 0 40px;margin-top:40px;
+  }
+  footer .eyebrow{color:var(--amber);}
+  footer .eyebrow::before{color:#8492AC;}
+  footer h2{color:#fff;}
+  .footer-lead{color:#B8C2D6;font-size:15px;max-width:520px;margin:0 0 28px;line-height:1.6;}
+  .footer-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:40px;}
+  .footer-actions a{
+    text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:13px;
+    padding:12px 18px;border-radius:7px;font-weight:500;
+  }
+  .footer-actions a.li{background:var(--accent);color:#fff;}
+  .footer-actions a.li:hover{background:#4A73E8;}
+  .footer-actions a.mail{border:1px solid #3A445A;color:#fff;}
+  .footer-actions a.mail:hover{border-color:#6C7A96;}
+  .footer-bottom{
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    border-top:1px solid #232C3F;padding-top:20px;
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#6C7A96;
+  }
+
+  /* reveal animation */
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease, transform .5s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{transition:none;opacity:1;transform:none;}
+    .dot::after{animation:none;}
+  }
+
+  @media (max-width:720px){
+    .nav-links{display:none;}
+    h1{font-size:32px;}
+    .metrics{grid-template-columns:1fr 1fr;}
+    .skill-groups{grid-template-columns:1fr;}
+    .edu-card{flex-direction:column;align-items:flex-start;}
+    .edu-meta{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand"><span class="dot"></span> Jayanth Vallabi</div>
+    <div class="nav-links">
+      <a href="#experience">Experience</a>
+      <a href="#project">Project</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+    </div>
+    <a class="nav-cta" href="#contact">Contact →</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="status-card reveal">
+      <div class="status-row"><span class="dot"></span> status: open to opportunities</div>
+      <h1>Jayanth Vallabi</h1>
+      <p class="role">Software Engineer, AI/ML — Backend Systems &amp; GenAI</p>
+      <p class="summary">Python developer with 4+ years designing and deploying production-grade backend systems, REST APIs, and AI/ML services across Healthcare, Finance, and Technology. Builds with FastAPI, PySpark, Docker, Kubernetes, and AWS — with deep experience in RAG pipelines, LLM fine-tuning, and MLOps for AI-powered applications.</p>
+      <div class="contact-row">
+        <a class="primary" href="https://www.linkedin.com/in/jayanth-vallabi" target="_blank" rel="noopener">in/jayanth-vallabi</a>
+        <a href="mailto:jayanthvallabi29@gmail.com">jayanthvallabi29@gmail.com</a>
+        <a href="tel:+16572179419">+1 (657) 217-9419</a>
+        <span>SF Bay Area</span>
+        <a href="Jayanth_Vallabi_Resume.pdf" target="_blank">↓ Resume (PDF)</a>
+      </div>
+
+      <div class="metrics">
+        <div class="metric"><div class="val">87%</div><div class="lbl">Faster execution</div></div>
+        <div class="metric"><div class="val">39%</div><div class="lbl">Lower API latency</div></div>
+        <div class="metric"><div class="val">99.5%</div><div class="lbl">Uptime at scale</div></div>
+        <div class="metric"><div class="val">1M+</div><div class="lbl">Records served</div></div>
+      </div>
+    </div>
+  </header>
+
+  <section id="experience">
+    <p class="eyebrow reveal">Experience</p>
+    <h2 class="reveal">Career pipeline</h2>
+    <div class="pipeline">
+
+      <div class="node reveal">
+        <div class="node-marker current"><span class="inner-dot"></span></div>
+        <div class="node-card">
+          <div class="node-head">
+            <span class="node-role">Software Development Engineer, AI/ML <span class="badge-live">current</span></span>
+            <span class="node-date">Oct 2024 — Present</span>
+          </div>
+          <div class="node-org">Cigna Healthcare Inc. · USA</div>
+          <ul class="bullets">
+            <li>Design AI/ML services and REST APIs with <strong>FastAPI, scikit-learn, PySpark, and SQL</strong>, powering predictive modeling and patient risk classification across <strong>1M+ member records</strong>.</li>
+            <li>Deploy real-time inference APIs with <strong>Docker, Kubernetes, and AWS SageMaker</strong>, cutting manual model execution from 4 hours to <strong>under 30 minutes</strong> per release.</li>
+            <li>Run MLOps/CI-CD with <strong>MLflow, GitHub Actions, and Snowflake</strong>, moving release cadence from monthly to <strong>bi-weekly</strong> with automated drift detection.</li>
+            <li>Build GenAI document intelligence with <strong>LangChain, RAG, LoRA/PEFT</strong>, cutting clinical document review time by <strong>6–8 hours/week</strong> under HIPAA compliance.</li>
+            <li>Optimize model serving, lowering inference latency from 900ms to <strong>550ms</strong>, while mentoring 3 junior engineers and sustaining <strong>99.5% availability</strong>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="node reveal">
+        <div class="node-marker"><span class="inner-dot"></span></div>
+        <div class="node-card">
+          <div class="node-head">
+            <span class="node-role">Software Engineer</span>
+            <span class="node-date">May 2021 — Dec 2023</span>
+          </div>
+          <div class="node-org">Capgemini · India</div>
+          <ul class="bullets">
+            <li>Built backend services and REST APIs for financial services clients with <strong>FastAPI, SQL, PySpark, scikit-learn, PyTorch, TensorFlow</strong>, supporting risk scoring and transaction analytics.</li>
+            <li>Engineered classification, forecasting, and anomaly-detection modules, improving system accuracy by <strong>10–15%</strong> over baseline.</li>
+            <li>Automated data and deployment pipelines with <strong>Docker, Kubernetes, Airflow, MLflow</strong>, saving <strong>12–15 engineering hours per sprint</strong>.</li>
+            <li>Built financial document search with <strong>LangChain, LlamaIndex, ChromaDB, Pinecone, FAISS, Weaviate</strong>, bringing retrieval response under <strong>3 seconds</strong>.</li>
+            <li>Validated backend outputs via <strong>pytest, RAGAS, A/B testing</strong>, cutting manual QA effort by <strong>20+ hours/month</strong>.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="project">
+    <p class="eyebrow reveal">Project</p>
+    <h2 class="reveal">Featured build</h2>
+    <div class="project-card reveal">
+      <div class="project-tag">Sep 2025 — Feb 2026</div>
+      <div class="node-role" style="margin-bottom:14px;">Healthcare Document Intelligence Platform</div>
+      <ul class="bullets">
+        <li>Built a document intelligence platform with <strong>FastAPI, LangChain, Hugging Face Transformers, RAG, and Pinecone</strong>, enabling semantic search and Q&amp;A over <strong>10,000+ clinical documents</strong> with retrieval under 2 seconds.</li>
+        <li>Developed REST APIs and microservices with <strong>Pydantic, SQLAlchemy, PostgreSQL, and JWT auth</strong>, supporting <strong>500+ concurrent requests</strong> with automated pytest coverage.</li>
+        <li>Deployed as a containerized microservice on <strong>Docker, Kubernetes, and AWS Lambda</strong> with CI/CD, achieving <strong>99% uptime</strong> and zero-downtime deploys.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="skills">
+    <p class="eyebrow reveal">Stack</p>
+    <h2 class="reveal">Skills &amp; tools</h2>
+    <div class="skill-groups">
+      <div class="skill-group reveal">
+        <h3>Languages &amp; Libraries</h3>
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">SQL</span><span class="chip">PySpark</span><span class="chip">JavaScript</span>
+          <span class="chip">FastAPI</span><span class="chip">Flask</span><span class="chip">Django</span><span class="chip">Pydantic</span>
+          <span class="chip">SQLAlchemy</span><span class="chip">NumPy</span><span class="chip">Pandas</span><span class="chip">scikit-learn</span>
+          <span class="chip">PyTorch</span><span class="chip">TensorFlow</span><span class="chip">XGBoost</span><span class="chip">pytest</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3>Backend &amp; APIs</h3>
+        <div class="chips">
+          <span class="chip">REST APIs</span><span class="chip">GraphQL</span><span class="chip">gRPC</span><span class="chip">Microservices</span>
+          <span class="chip">OAuth / JWT</span><span class="chip">Async Programming</span><span class="chip">OOP &amp; Design Patterns</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3>Data &amp; Cloud</h3>
+        <div class="chips">
+          <span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">MongoDB</span><span class="chip">Redis</span>
+          <span class="chip">Snowflake</span><span class="chip">ChromaDB</span><span class="chip">Pinecone</span><span class="chip">FAISS</span>
+          <span class="chip">Weaviate</span><span class="chip">AWS (SageMaker, S3, Lambda, EC2)</span><span class="chip">Docker</span><span class="chip">Kubernetes</span>
+          <span class="chip">Airflow</span><span class="chip">GitHub Actions</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3>AI/ML, MLOps &amp; GenAI</h3>
+        <div class="chips">
+          <span class="chip">MLflow</span><span class="chip">Model Monitoring</span><span class="chip">Drift Detection</span><span class="chip">A/B Testing</span>
+          <span class="chip">LLMs</span><span class="chip">LoRA / PEFT</span><span class="chip">Hugging Face</span><span class="chip">LangChain</span>
+          <span class="chip">LlamaIndex</span><span class="chip">RAG / RAGAS</span><span class="chip">OpenAI API</span><span class="chip">Embeddings</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <p class="eyebrow reveal">Education</p>
+    <h2 class="reveal">Academic background</h2>
+    <div class="edu-card reveal">
+      <div>
+        <div class="edu-name">Master of Science, Computer Science</div>
+        <div class="edu-school">California State University, Fullerton</div>
+      </div>
+      <div class="edu-meta">USA · 2026<br>GPA 3.6</div>
+    </div>
+  </section>
+</div>
+
+<footer id="contact">
+  <div class="wrap">
+    <p class="eyebrow">Get in touch</p>
+    <h2>Let's connect</h2>
+    <p class="footer-lead">Open to AI/ML and backend engineering roles. The fastest way to reach me is LinkedIn — email works too.</p>
+    <div class="footer-actions">
+      <a class="li" href="https://www.linkedin.com/in/jayanth-vallabi" target="_blank" rel="noopener">Connect on LinkedIn →</a>
+      <a class="mail" href="mailto:jayanthvallabi29@gmail.com">jayanthvallabi29@gmail.com</a>
+      <a class="mail" href="tel:+16572179419">+1 (657) 217-9419</a>
+      <a class="mail" href="Jayanth_Vallabi_Resume.pdf" target="_blank">Download résumé</a>
+    </div>
+    <div class="footer-bottom">
+      <span>Jayanth Vallabi — SF Bay Area</span>
+      <span>Built as a living portfolio · update anytime</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  },{threshold:0.15});
+  items.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
